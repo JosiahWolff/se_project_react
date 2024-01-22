@@ -1,0 +1,18 @@
+.weather {
+  position: relative;
+}
+
+.weather_temp {
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
+  line-height: 40px;
+  font-size: 36px;
+  color: #fff;
+  position: absolute;
+  top: 27%;
+  left: 2%;
+}
+
+.weather_image {
+  width: 100%;
+  border-radius: 12px;
+}

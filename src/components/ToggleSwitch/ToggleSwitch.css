@@ -1,0 +1,50 @@
+.switch {
+  display: flex;
+  position: relative;
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.switch_box {
+  border: 2px solid #7e7e7e;
+  appearance: none;
+  border-radius: 20px;
+  width: 56px;
+  height: 28px;
+}
+
+.switch__box:hover {
+  border: 2px solid black;
+}
+
+.switch__slider {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+}
+
+.switch__slider_C {
+  left: 28px;
+}
+
+.switch__active {
+  color: white;
+}
+
+.switch__temp_F {
+  position: absolute;
+  left: 10px;
+  top: -10px;
+}
+
+.switch__temp_C {
+  position: absolute;
+  left: 38px;
+  top: -10px;
+}
