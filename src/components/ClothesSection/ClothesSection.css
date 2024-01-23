@@ -3,8 +3,18 @@
   flex-wrap: wrap;
   gap: 15px;
   row-gap: 0px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 20px;
   text-align: center;
   position: relative;
+}
+
+.itemCard {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }

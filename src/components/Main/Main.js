@@ -6,8 +6,8 @@ import { useMemo, useContext } from "react";
 
 function Main({ weatherTemp, onSelectCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temperature =
-    currentTemperatureUnit === "C" ? weatherTemp.C : weatherTemp.F;
+
+  const temperature = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
   const tempF = weatherTemp.F;
 
@@ -34,7 +34,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
           wear:
         </p>
         <div className="card_items">
-          {filteredCards.map((item, index) => {
+          {filteredCards.map((item) => {
             return (
               <ItemCard
                 key={item.id}
@@ -42,6 +42,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
                 onSelectCard={onSelectCard}
                 link={item.link}
                 name={item.name}
+                weather={item.weather}
               />
             );
           })}
