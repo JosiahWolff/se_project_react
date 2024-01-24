@@ -20,7 +20,9 @@ const ItemModal = ({ selectedCard, onClose, handleDeleteCard }) => {
             </p>
           </div>
           <button
-            onClick={handleDeleteCard}
+            onClick={() => {
+              handleDeleteCard(selectedCard);
+            }}
             type="button"
             className="modal__card_delete"
           >

@@ -125,11 +125,16 @@ function App() {
         <ItemModal
           selectedCard={selectedCard}
           onClose={handleCloseModal}
-          onClick={handleDeleteModal}
+          handleDeleteCard={handleDeleteCard}
         />
       )}
       {activeModal === "delete" && (
-        <DeleteItem onClose={handleCloseModal} deleteCard={handleDeleteCard} />
+        <DeleteItem
+          onClose={handleCloseModal}
+          handleDeleteCard={() => {
+            handleDeleteCard(selectedCard);
+          }}
+        />
       )}
     </CurrentTemperatureUnitContext.Provider>
   );

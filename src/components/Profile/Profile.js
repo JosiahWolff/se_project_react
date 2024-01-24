@@ -3,7 +3,7 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import React from "react";
 
-const Profile = ({ onCreate, clothingItems, onSelectCard }) => {
+const Profile = ({ onCreateModal, clothingItems, onSelectCard }) => {
   return (
     <div className="profile">
       <SideBar />
@@ -14,7 +14,7 @@ const Profile = ({ onCreate, clothingItems, onSelectCard }) => {
             Your clothing items
             <button
               className="profile__add-button"
-              onClick={onCreate}
+              onClick={onCreateModal}
               type="button"
             >
               {" "}
@@ -26,7 +26,7 @@ const Profile = ({ onCreate, clothingItems, onSelectCard }) => {
           <ClothesSection
             clothingItems={clothingItems}
             onSelectCard={onSelectCard}
-            onCreate={onCreate}
+            onCreate={onCreateModal}
           />
         </div>
       </div>
