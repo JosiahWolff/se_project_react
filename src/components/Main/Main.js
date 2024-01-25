@@ -37,7 +37,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
           {filteredCards.map((item) => {
             return (
               <ItemCard
-                key={item.id}
+                key={item._id}
                 item={item}
                 onSelectCard={onSelectCard}
                 link={item.link}
