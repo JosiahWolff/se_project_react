@@ -9,7 +9,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
 
   const temperature = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
-  const tempF = weatherTemp.F;
+  const tempF = weatherTemp.temperature?.F;
 
   const weatherType = useMemo(() => {
     if (tempF >= 86) {
