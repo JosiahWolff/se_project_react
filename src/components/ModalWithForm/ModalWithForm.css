@@ -20,14 +20,11 @@
 }
 
 .modal__title {
-  font-family: "CabinetGrotesk-Regular", Arial, sans-serif;
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
   font-size: 16px;
-  font-weight: 700;
   line-height: 20px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-bottom: 24px;
-  margin-top: 0;
+  padding: 28px 28px 0 28px;
+  margin: 0 0 24px 0;
 }
 
 .modal__form {
@@ -36,11 +33,17 @@
 }
 
 .modal__input {
-  height: 24px;
-  width: 440px;
   border: none;
   border-bottom: 1px solid #000;
-  margin-top: 8px;
+  width: 99%;
+  margin: 0 0 24px 0;
+}
+
+.modal__input-title {
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 0 8px 0;
 }
 
 .modal__label {
