@@ -12,7 +12,7 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
     changePassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
     loginUser({ email, password });
   };
@@ -20,9 +20,10 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
   return (
     <ModalWithForm
       name="login"
+      title="Log In"
       onClose={onClose}
       buttonText="Log In"
-      onSubmit={handleSubmit}
+      onLogin={onLogin}
     >
       <div>
         <label htmlFor="email-input" className="modal__input-title">
@@ -61,7 +62,7 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
       </div>
 
       <button
-        className="modal__register"
+        className="modal__login"
         type="button"
         onClick={openRegisterModal}
       >

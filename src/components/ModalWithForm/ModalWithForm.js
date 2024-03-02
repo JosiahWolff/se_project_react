@@ -23,7 +23,7 @@ const ModalWithForm = ({
           {children}
           <button
             type="submit"
-            className="weather__button weather__button_disabled"
+            className="modal__submit modal__submit_disabled"
           >
             {buttontext}
           </button>
