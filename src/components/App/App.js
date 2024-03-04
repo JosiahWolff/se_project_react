@@ -80,7 +80,6 @@ function App() {
       .then((res) => {
         handleCloseModal();
         localStorage.setItem("jwt", res.data);
-        console.log("Token set:", res.data);
         setLoggedIn(true);
         setCurrentUser(res.user);
       })
