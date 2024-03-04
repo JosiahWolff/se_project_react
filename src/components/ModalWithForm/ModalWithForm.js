@@ -3,7 +3,7 @@ import React from "react";
 
 const ModalWithForm = ({
   children,
-  buttontext,
+  buttonText,
   title,
   onClose,
   name,
@@ -25,7 +25,7 @@ const ModalWithForm = ({
             type="submit"
             className="modal__submit modal__submit_disabled"
           >
-            {buttontext}
+            {buttonText}
           </button>
         </form>
       </div>

@@ -1,4 +1,9 @@
-const ItemModal = ({ selectedCard, onClose, handleDeleteCard }) => {
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
+
+const ItemModal = ({ selectedCard, onClose, handleDeleteCard, cardObj }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwner = cardObj.owner === currentUser._id;
   return (
     <div className={"modal"}>
       <div className="modal__preview">
@@ -19,15 +24,22 @@ const ItemModal = ({ selectedCard, onClose, handleDeleteCard }) => {
               Weather Type: {selectedCard.weather}
             </p>
           </div>
-          <button
-            onClick={() => {
-              handleDeleteCard(selectedCard);
-            }}
-            type="button"
-            className="modal__card_delete"
-          >
-            Delete item
-          </button>
+
+          <div>
+            {isOwner ? (
+              <button
+                onClick={() => {
+                  handleDeleteCard(selectedCard);
+                }}
+                type="button"
+                className="modal__card_delete"
+              >
+                Delete item
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
     </div>

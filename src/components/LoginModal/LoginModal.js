@@ -23,7 +23,7 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
       title="Log In"
       onClose={onClose}
       buttonText="Log In"
-      onLogin={onLogin}
+      onSubmit={onLogin}
     >
       <div>
         <label htmlFor="email-input" className="modal__input-title">
@@ -63,7 +63,7 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
 
       <button
         className="modal__login"
-        type="button"
+        type="submit"
         onClick={openRegisterModal}
       >
         or Sign Up

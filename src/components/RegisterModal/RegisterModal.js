@@ -91,7 +91,7 @@ const RegisterModal = ({ onClose, registerUser, openLoginModal }) => {
 
       <div>
         <label htmlFor="avatar-input" className="modal__input-title">
-          Avatar URL *
+          Avatar URL*
         </label>
         <input
           id="avatar-input"
@@ -106,7 +106,7 @@ const RegisterModal = ({ onClose, registerUser, openLoginModal }) => {
       </div>
 
       <button className="modal__login" type="button" onClick={openLoginModal}>
-        or Log in
+        or Log In
       </button>
     </ModalWithForm>
   );

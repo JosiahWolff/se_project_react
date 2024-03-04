@@ -75,20 +75,20 @@ function App() {
   };
 
   const loginUser = (user) => {
+    setIsLoading(true);
     login(user)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          console.log("Token set:", res.token);
-          setLoggedIn(true);
-          setCurrentUser(res.user);
-          handleCloseModal();
-        } else {
-          console.error("${e}");
-        }
+        handleCloseModal();
+        localStorage.setItem("jwt", res.data);
+        console.log("Token set:", res.data);
+        setLoggedIn(true);
+        setCurrentUser(res.user);
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
