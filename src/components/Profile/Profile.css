@@ -50,6 +50,7 @@
   align-items: center;
   gap: 16px;
   white-space: nowrap;
+  margin-bottom: 24px;
 }
 
 .profile__items {
@@ -65,4 +66,27 @@
   font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
   font-size: 20px;
   line-height: 25px;
+}
+
+.profile__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.profile__button {
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile__options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 8px;
 }
