@@ -51,6 +51,10 @@ function App() {
     setActiveModal("");
   };
 
+  function handleOpenItemModal() {
+    setActiveModal("preview");
+  }
+
   const handleOpenLoginModal = () => {
     setActiveModal("login");
   };
@@ -219,6 +223,7 @@ function App() {
               clothingItems={clothingItems}
               onCardLike={handleCardLike}
               loggedIn={loggedIn}
+              handleOpenItemModal={handleOpenItemModal}
             />
           </Route>
           <Route path="/profile" loggedIn={loggedIn}>
@@ -226,6 +231,7 @@ function App() {
               onSelectCard={handleSelectedCard}
               clothingItems={clothingItems}
               onCreateModal={handleCreateModal}
+              handleOpenItemModal={handleOpenItemModal}
               onCardLike={handleCardLike}
               loggedIn={loggedIn}
               editProfile={handleOpenEditProfileModal}
