@@ -1,24 +1,28 @@
 const baseUrl = "http://localhost:3001";
+const jwt = localStorage.getItem("jwt");
 
 export function checkResponse(res) {
   if (res.ok) {
     return res.json();
   } else {
-    Promise.reject(`Error: ${res.status}`);
+    return Promise.reject(`Error: ${res.status}`);
   }
 }
 
 export function getItems() {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
   }).then(checkResponse);
 }
 
-export const postItems = ({ name, imageUrl, weather }) =>
+export const postItems = ({ name, imageUrl, weather, token }) =>
   fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
     body: JSON.stringify({
       name: name,
       imageUrl: imageUrl,

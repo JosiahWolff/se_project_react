@@ -171,23 +171,16 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-
-    if (token) {
-      auth
-        .checkToken(token)
-        .then((res) => {
-          setLoggedIn(true);
-          setCurrentUser(res.user);
-        })
-        .catch((error) => {
-          console.error("Error checking token:", error);
-          localStorage.removeItem("jwt");
-          setLoggedIn(false);
-        });
-    }
-  }, []);
+  function checkLoggedIn(token) {
+    return checkToken(token)
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
 
   useEffect(() => {
     getForecastWeather()
@@ -200,6 +193,16 @@ function App() {
     getItems()
       .then((data) => setClothingItems(data))
       .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (jwt !== null) {
+      checkLoggedIn(jwt).catch((e) => {
+        console.error(e);
+      });
+    }
   }, []);
 
   return (
