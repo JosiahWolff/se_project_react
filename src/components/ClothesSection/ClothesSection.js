@@ -6,7 +6,6 @@ import { React, useContext } from "react";
 
 function ClothesSection({ clothingItems, onSelectCard, handleOpenItemModal }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(CurrentUserContext);
   return (
     <section className="clothes__section">
       <ul className="itemCard">

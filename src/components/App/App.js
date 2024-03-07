@@ -85,7 +85,7 @@ function App() {
         handleCloseModal();
         localStorage.setItem("jwt", res.data);
         setLoggedIn(true);
-        setCurrentUser(res.user);
+        setCurrentUser(res.data);
       })
       .catch((error) => {
         console.error(error);
