@@ -244,7 +244,11 @@ function App() {
         </Switch>
 
         {activeModal === "login" && (
-          <LoginModal onClose={handleCloseModal} loginUser={loginUser} />
+          <LoginModal
+            onClose={handleCloseModal}
+            loginUser={loginUser}
+            openRegisterModal={handleOpenRegisterModal}
+          />
         )}
 
         {activeModal === "register" && (

@@ -105,7 +105,7 @@ const RegisterModal = ({ onClose, registerUser, openLoginModal }) => {
         ></input>
       </div>
 
-      <button className="modal__login" type="submit">
+      <button className="modal__login" type="button" onClick={openLoginModal}>
         or Log In
       </button>
     </ModalWithForm>

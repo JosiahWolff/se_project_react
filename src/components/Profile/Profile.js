@@ -3,10 +3,16 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import React from "react";
 
-const Profile = ({ onCreateModal, clothingItems, onSelectCard }) => {
+const Profile = ({
+  onCreateModal,
+  clothingItems,
+  onSelectCard,
+  editProfile,
+  logout,
+}) => {
   return (
     <div className="profile">
-      <SideBar />
+      <SideBar editProfile={editProfile} logout={logout}></SideBar>
 
       <div className="profile__items-container">
         <div className="profile__clothing-header">

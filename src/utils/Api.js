@@ -12,11 +12,14 @@ export function checkResponse(res) {
 export function getItems() {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
   }).then(checkResponse);
 }
 
-export const postItems = ({ name, imageUrl, weather, token }) =>
+export const postItems = ({ name, imageUrl, weather }) =>
   fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -33,7 +36,10 @@ export const postItems = ({ name, imageUrl, weather, token }) =>
 export const deleteItems = (cardid) =>
   fetch(`${baseUrl}/items/${cardid}`, {
     method: "DELETE",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
   }).then(checkResponse);
 
 export const addCardLike = (_id, token) => {

@@ -4,7 +4,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useMemo, useContext } from "react";
 
-function Main({ weatherTemp, onSelectCard, clothingItems }) {
+function Main({ weatherTemp, onSelectCard, clothingItems, loggedIn }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const temperature = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
@@ -43,6 +43,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
                 link={item.link}
                 name={item.name}
                 weather={item.weather}
+                loggedIn={loggedIn}
               />
             );
           })}

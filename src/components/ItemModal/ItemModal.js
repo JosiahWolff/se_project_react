@@ -1,9 +1,9 @@
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
-const ItemModal = ({ selectedCard, onClose, handleDeleteCard, cardObj }) => {
+const ItemModal = ({ selectedCard, onClose, handleDeleteCard }) => {
   const currentUser = useContext(CurrentUserContext);
-  const isOwner = cardObj.owner === currentUser._id;
+  const isOwner = selectedCard.owner === currentUser._id;
   return (
     <div className={"modal"}>
       <div className="modal__preview">

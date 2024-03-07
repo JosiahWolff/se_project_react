@@ -63,7 +63,7 @@ const LoginModal = ({ onClose, loginUser, openRegisterModal }) => {
 
       <button
         className="modal__login"
-        type="submit"
+        type="button"
         onClick={openRegisterModal}
       >
         or Sign Up
