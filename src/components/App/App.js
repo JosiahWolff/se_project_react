@@ -14,7 +14,13 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // Utils Imports
-import { login, update, register, checkToken } from "../../utils/auth.js";
+import {
+  login,
+  update,
+  register,
+  checkToken,
+  getUserData,
+} from "../../utils/auth.js";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import {
   getItems,
@@ -23,7 +29,6 @@ import {
   addCardLike,
   removeCardLike,
 } from "../../utils/Api";
-import * as auth from "../../utils/auth";
 // React Imports
 import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
@@ -37,6 +42,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const history = useHistory("");
@@ -67,6 +73,17 @@ function App() {
     setActiveModal("edit");
   };
 
+  function checkLoggedIn(token) {
+    return checkToken(token)
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
   const registerUser = (values) => {
     register(values)
       .then(() => {
@@ -84,8 +101,8 @@ function App() {
       .then((res) => {
         handleCloseModal();
         localStorage.setItem("jwt", res.data);
-        setLoggedIn(true);
-        setCurrentUser(res.data);
+
+        return checkLoggedIn(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -160,7 +177,7 @@ function App() {
     setIsLoading(true);
     postItems(values)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems((prevItems) => [res, ...prevItems]);
         handleCloseModal();
       })
       .catch((err) => {
@@ -171,16 +188,13 @@ function App() {
       });
   };
 
-  function checkLoggedIn(token) {
-    return checkToken(token)
-      .then((res) => {
-        setLoggedIn(true);
-        setCurrentUser(res.data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }
+  useEffect(() => {
+    if (loggedIn) {
+      getItems()
+        .then((data) => setClothingItems(data))
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     getForecastWeather()
@@ -199,11 +213,27 @@ function App() {
     const jwt = localStorage.getItem("jwt");
 
     if (jwt !== null) {
-      checkLoggedIn(jwt).catch((e) => {
-        console.error(e);
-      });
+      checkLoggedIn(jwt)
+        .then(() => {
+          getUserData(jwt)
+            .then((res) => {
+              setCurrentUser(res.data);
+            })
+            .catch((error) => {
+              if (error.response && error.response.status === 401) {
+                // Handle unauthorized error (token expired or invalid)
+                console.error("Token expired or invalid. Logging out...");
+                logoutUser();
+              } else {
+                console.error("Error fetching user data:", error);
+              }
+            });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
