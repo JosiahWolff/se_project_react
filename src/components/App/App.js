@@ -177,7 +177,7 @@ function App() {
     setIsLoading(true);
     postItems(values)
       .then((res) => {
-        setClothingItems((prevItems) => [res, ...prevItems]);
+        setClothingItems((prevItems) => [res.data, ...prevItems]);
         handleCloseModal();
       })
       .catch((err) => {
