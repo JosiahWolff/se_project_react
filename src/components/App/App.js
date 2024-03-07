@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 // Modal Imports
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import DeleteItem from "../DeleteModal/DeleteModal";
+import DeleteItemModal from "../DeleteModal/DeleteModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
@@ -254,7 +254,7 @@ function App() {
               weatherTemp={temp}
               onSelectCard={handleSelectedCard}
               clothingItems={clothingItems}
-              onCardLike={handleCardLike}
+              handleCardLike={handleCardLike}
               loggedIn={loggedIn}
               handleOpenItemModal={handleOpenItemModal}
             />
@@ -265,7 +265,7 @@ function App() {
               clothingItems={clothingItems}
               onCreateModal={handleCreateModal}
               handleOpenItemModal={handleOpenItemModal}
-              onCardLike={handleCardLike}
+              handleCardLike={handleCardLike}
               loggedIn={loggedIn}
               editProfile={handleOpenEditProfileModal}
               logout={logoutUser}
@@ -315,12 +315,12 @@ function App() {
           />
         )}
 
-        {activeModal === "delete" && (
-          <DeleteItem
+        {activeModal === "confirm" && (
+          <DeleteItemModal
             onClose={handleCloseModal}
-            handleDeleteCard={() => {
-              handleDeleteCard(selectedCard);
-            }}
+            handleDeleteCard={handleDeleteCard}
+            selectedCard={selectedCard}
+            isLoading={isLoading}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>

@@ -8,7 +8,7 @@ function ClothesSection({
   onSelectCard,
   handleOpenItemModal,
   loggedIn,
-  OnCardLike,
+  handleCardLike,
 }) {
   const currentUser = useContext(CurrentUserContext);
   return (
@@ -23,7 +23,7 @@ function ClothesSection({
                 item={item}
                 onSelectCard={onSelectCard}
                 handleOpenItemModal={handleOpenItemModal}
-                OnCardLike={OnCardLike}
+                handleCardLike={handleCardLike}
                 loggedIn={loggedIn}
               />
             );

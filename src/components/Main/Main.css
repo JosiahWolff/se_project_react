@@ -1,3 +1,10 @@
 .main__section {
   margin: 0 20px 0 20px;
 }
+
+.card_items {
+  display: flex;
+  gap: 15px;
+  margin-top: 34px;
+  padding: 0;
+}

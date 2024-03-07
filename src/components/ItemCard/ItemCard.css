@@ -1,18 +1,34 @@
-.card_name {
-  position: relative;
-  margin: 0 auto;
-  padding: 2px 12px;
-  top: 17px;
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px;
-  width: fit-content;
-  text-align: center;
-  color: rgba(0, 0, 0, 0.6);
-  background-color: rgba(255, 255, 255, 1);
+.itemcard__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  top: 20px;
+  position: relative; /* Add this line to make it a positioning context */
+}
+
+.itemcard__info {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Adjust alignment as needed */
+  background-color: white;
+  padding: 2px 6px 2px 8px;
   border-radius: 4px;
+  position: absolute; /* Remove this line */
+  top: 20px; /* Remove this line */
+}
+
+.itemcard__name-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card_name {
+  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  opacity: 0.6;
 }
 
 .card_image {
@@ -27,26 +43,17 @@
   cursor: pointer;
 }
 
-.card_section {
-  margin-top: 44px;
-  color: #000;
-  font-family: Cabinet Grotesk;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-.card_items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 34px;
+.itemcard__likebutton {
+  background-color: rgba(250, 250, 250, 0);
+  background-image: url("../../images/like-button-inactive.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-.itemCard__description {
-  margin: 0 40px 20px 20px;
-  font-family: "CabinetGrotesk-Bold", Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  line-height: 25px;
+.itemcard__likebutton_liked {
+  background-image: url("../../images/like-button-active.svg");
 }

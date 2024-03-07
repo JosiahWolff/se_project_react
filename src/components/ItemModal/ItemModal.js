@@ -28,9 +28,7 @@ const ItemModal = ({ selectedCard, onClose, handleDeleteCard }) => {
           <div>
             {isOwner ? (
               <button
-                onClick={() => {
-                  handleDeleteCard(selectedCard);
-                }}
+                onClick={handleDeleteCard}
                 type="button"
                 className="modal__card_delete"
               >
