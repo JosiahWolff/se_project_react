@@ -1,5 +1,4 @@
 const baseUrl = "http://localhost:3001";
-const jwt = localStorage.getItem("jwt");
 
 export function checkResponse(res) {
   if (res.ok) {
@@ -10,6 +9,8 @@ export function checkResponse(res) {
 }
 
 export function getItems() {
+  const jwt = localStorage.getItem("jwt"); //get new token
+
   return fetch(`${baseUrl}/items`, {
     method: "GET",
     headers: {
@@ -19,8 +20,10 @@ export function getItems() {
   }).then(checkResponse);
 }
 
-export const postItems = ({ name, imageUrl, weather }) =>
-  fetch(`${baseUrl}/items`, {
+export const postItems = ({ name, imageUrl, weather }) => {
+  const jwt = localStorage.getItem("jwt"); //get new token
+
+  return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -32,34 +35,42 @@ export const postItems = ({ name, imageUrl, weather }) =>
       weather: weather,
     }),
   }).then(checkResponse);
+};
 
-export const deleteItems = (cardid) =>
-  fetch(`${baseUrl}/items/${cardid}`, {
+export const deleteItems = (cardid) => {
+  const jwt = localStorage.getItem("jwt"); //get new token
+
+  return fetch(`${baseUrl}/items/${cardid}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${jwt}`,
     },
   }).then(checkResponse);
+};
 
-export const addCardLike = (_id, token) => {
+export const addCardLike = (_id) => {
+  const jwt = localStorage.getItem("jwt"); //get new token
+
   return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 };
 
-export const removeCardLike = (_id, token) => {
+export const removeCardLike = (_id) => {
+  const jwt = localStorage.getItem("jwt"); //get new token
+
   return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 };
