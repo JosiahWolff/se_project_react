@@ -10,6 +10,7 @@ import DeleteItemModal from "../DeleteModal/DeleteModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js";
 //Context Imports
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -57,6 +58,22 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
   function handleOpenItemModal() {
     setActiveModal("preview");
   }
@@ -73,6 +90,14 @@ function App() {
     setActiveModal("edit");
   };
 
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(handleCloseModal)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }
+
   function checkLoggedIn(token) {
     return checkToken(token)
       .then((res) => {
@@ -85,43 +110,35 @@ function App() {
   }
 
   const registerUser = (values) => {
-    register(values)
-      .then(() => {
-        handleCloseModal();
-        loginUser(values);
-      })
-      .catch((e) => {
-        console.error(`${e}`);
-      });
+    handleSubmit(() => register(values).then(() => loginUser(values)));
   };
 
   const loginUser = (user) => {
-    setIsLoading(true);
-    login(user)
-      .then((res) => {
-        handleCloseModal();
-        localStorage.setItem("jwt", res.data);
+    handleSubmit(() => {
+      setIsLoading(true);
+      login(user)
+        .then((res) => {
+          handleCloseModal();
+          const token = res.data;
+          setToken(token);
+          localStorage.setItem("jwt", res.data);
 
-        return checkLoggedIn(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+          return checkLoggedIn(res.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    });
   };
 
   const updateUser = (values) => {
     const jwt = localStorage.getItem("jwt");
-    update(values, jwt)
-      .then((res) => {
-        setCurrentUser(res.data);
-        handleCloseModal();
-      })
-      .catch((e) => {
-        console.error(`${e}`);
-      });
+    handleSubmit(() =>
+      update(values, jwt).then((res) => setCurrentUser(res.data))
+    );
   };
 
   const logoutUser = () => {
@@ -190,14 +207,6 @@ function App() {
   };
 
   useEffect(() => {
-    if (loggedIn) {
-      getItems()
-        .then((data) => setClothingItems(data))
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
     getForecastWeather()
       .then((data) => {
         setLocation(data.name);
@@ -216,6 +225,7 @@ function App() {
     if (jwt !== null) {
       checkLoggedIn(jwt)
         .then(() => {
+          setToken(token);
           getUserData(jwt)
             .then((res) => {
               setCurrentUser(res.data);
@@ -259,7 +269,7 @@ function App() {
               handleOpenItemModal={handleOpenItemModal}
             />
           </Route>
-          <Route path="/profile" loggedIn={loggedIn}>
+          <ProtectedRoute path="/profile" loggedIn={loggedIn}>
             <Profile
               onSelectCard={handleSelectedCard}
               clothingItems={clothingItems}
@@ -270,7 +280,7 @@ function App() {
               editProfile={handleOpenEditProfileModal}
               logout={logoutUser}
             />
-          </Route>
+          </ProtectedRoute>
         </Switch>
 
         {activeModal === "login" && (

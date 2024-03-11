@@ -1,10 +1,16 @@
 .main__section {
-  margin: 0 20px 0 20px;
+  margin: 0 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 15px;
 }
 
 .card_items {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 20px;
   margin-top: 34px;
+  margin-left: 40px;
+  margin-right: 40px;
   padding: 0;
 }
