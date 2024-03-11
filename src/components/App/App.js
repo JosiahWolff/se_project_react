@@ -114,24 +114,21 @@ function App() {
   };
 
   const loginUser = (user) => {
-    handleSubmit(() => {
-      setIsLoading(true);
-      login(user)
-        .then((res) => {
-          handleCloseModal();
-          const token = res.data;
-          setToken(token);
-          localStorage.setItem("jwt", res.data);
-
-          return checkLoggedIn(res.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    });
+    setIsLoading(true);
+    return login(user)
+      .then((res) => {
+        handleCloseModal();
+        const token = res.data;
+        setToken(token);
+        localStorage.setItem("jwt", token); // Update localStorage with the new token
+        return checkLoggedIn(token);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const updateUser = (values) => {
@@ -221,11 +218,10 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-
-    if (jwt !== null) {
+    if (jwt) {
       checkLoggedIn(jwt)
         .then(() => {
-          setToken(token);
+          setToken(jwt);
           getUserData(jwt)
             .then((res) => {
               setCurrentUser(res.data);
@@ -242,8 +238,10 @@ function App() {
         .catch((e) => {
           console.error(e);
         });
+    } else {
+      setLoggedIn(false); // Set loggedIn to false if token is not present
     }
-  }, [loggedIn]);
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
