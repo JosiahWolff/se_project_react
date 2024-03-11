@@ -146,22 +146,23 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleCardLike = (id) => {
+  const handleCardLike = (id, isLiked) => {
     if (isLiked) {
-      addCardLike(id, token)
-        .then((updatedCard) => {
-          setClothingItems((cards) =>
-            cards.map((c) => (c._id === id ? updatedCard.data : c))
-          );
-          setIsLiked(true);
-        })
-        .catch((err) => console.log(err));
-    } else {
       removeCardLike(id, token)
         .then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((c) => (c._id === id ? updatedCard.data : c))
+            cards.map((c) => (c._id === id ? updatedCard : c))
           );
+          setIsLiked(false); // Set isLiked to false when unliking
+        })
+        .catch((err) => console.log(err));
+    } else {
+      addCardLike(id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((c) => (c._id === id ? updatedCard : c))
+          );
+          setIsLiked(true); // Set isLiked to true when liking
         })
         .catch((err) => console.log(err));
     }
@@ -221,7 +222,6 @@ function App() {
             })
             .catch((error) => {
               if (error.response && error.response.status === 401) {
-                // Handle unauthorized error (token expired or invalid)
                 console.error("Token expired or invalid. Logging out...");
                 logoutUser();
               } else {
