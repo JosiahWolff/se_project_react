@@ -1,6 +1,10 @@
 import { checkResponse } from "./Api";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://wtwrByJosiah3311.crabdance.com"
+    : "http://localhost:3001";
+
 const baseHeaders = { "Content-Type": "application/json" };
 
 export const register = ({ name, avatar, email, password }) => {
