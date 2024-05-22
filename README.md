@@ -9,6 +9,11 @@ The idea of the application is pretty simple - we make a call to an API, which t
 - Fix some functionality and transition smoothness
 - Add more deisgn to help keep the users attention
 
+## Preview
+
+![image](https://github.com/JosiahWolff/se_project_react/assets/134183204/989c608d-eaaf-4c6c-a94d-85a98cc8761b)
+
+
 ## Links
 
 -[Back-end Project](https://github.com/JosiahWolff/se_project_express)
