@@ -1,7 +1,6 @@
 import "./DeleteModal.css";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import close from "../../images/close.svg";
 import React from "react";
+import close from "../../images/close.svg";
 
 const DeleteItemModal = ({ onClose, deleteCard }) => {
   return (

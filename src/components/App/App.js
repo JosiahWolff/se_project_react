@@ -145,7 +145,12 @@ function App() {
     history.push("/");
   };
 
-  const handleDeleteCard = () => {
+  const handleDeleteCard = (card) => {
+    setSelectedCard(card);
+    setActiveModal("confirm");
+  };
+
+  const deleteCard = () => {
     const id = selectedCard._id;
     deleteItems(id)
       .then(() => {
@@ -326,7 +331,7 @@ function App() {
         {activeModal === "confirm" && (
           <DeleteItemModal
             onClose={handleCloseModal}
-            handleDeleteCard={handleDeleteCard}
+            deleteCard={deleteCard}
             selectedCard={selectedCard}
             isLoading={isLoading}
           />
