@@ -1,5 +1,9 @@
 # WTWR (What to Wear?)
 
+## Attention 
+
+This projects domain was made on a free website and is not currently resolved in a lot of areas so if you can not access the active site please feel free to watch the demo. Sorry for the inconvience.
+
 ## About the project
 
 The idea of the application is pretty simple - we make a call to an API, which then responds with the daily weather forecast. We collect the weather data, process it, and then based on the forecast, we recommend suitable clothing to the user.
