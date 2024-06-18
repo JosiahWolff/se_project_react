@@ -1,6 +1,6 @@
 # WTWR (What to Wear?)
 
-## Attention 
+## ATTENTION 
 
 This projects domain was made on a free website and is not currently resolved in a lot of areas so if you can not access the active site please feel free to watch the demo. Sorry for the inconvience.
 
